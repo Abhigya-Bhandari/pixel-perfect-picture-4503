@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep demonstration profiles, products, and validation in `src/features/skincare/data.ts`; one source ensures reports and recommendations stay consistent.
+- Keep personal photos only in the mounted React session context and revoke object URLs on replacement; no persistence or network transmission preserves privacy.
+- Use content routes for home, analysis, results, products, tips, and how-it-works; separate pages preserve navigation and page metadata.

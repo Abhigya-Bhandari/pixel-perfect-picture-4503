@@ -1,23 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { ArrowRight, ArrowUpRight, Check, CheckCheck, ShieldCheck, Sparkles, Droplets, CircleDot, ScanLine, Heart, Leaf } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Steps, StartCTA } from '@/features/skincare/shared';
+import hero from '@/assets/derma-friends.png.asset.json';
+export const Route = createFileRoute('/')({
+ head:()=>({meta:[{title:'DERMA — Your Skin. Your Journey. Your Confidence.'},{name:'description',content:'Your judgment-free skincare companion. Explore simulated skin reports, simple routines, and teen-friendly skincare education.'},{property:'og:title',content:'DERMA — Your skincare journey starts here'},{property:'og:description',content:'Simple advice. Smarter skincare. No judgment.'},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'}]}),
+ component:Home,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+function Home(){const concerns=[{icon:Sparkles,title:'Inflammatory acne',text:'A gentler approach to inflamed breakouts.'},{icon:CircleDot,title:'Pimples & breakouts',text:'Small steps for everyday skin concerns.'},{icon:ScanLine,title:'Blackheads',text:'Understand clogged pores, without the picking.'},{icon:Droplets,title:'Oily skin',text:'Find balance. Keep the moisture.'},{icon:Leaf,title:'Everyday skincare',text:'The essentials, without the overwhelm.'}];return <><section className="hero"><img src={hero.url} alt="Two young friends embracing a simple, natural skincare routine" className="hero-photo"/><div className="hero-inner"><span className="eyebrow"><span/>YOUR PERSONAL SKINCARE COMPANION</span><h1>Your Skin.<br/>Your Journey.<br/>Your <em>Confidence.</em></h1><p className="hero-copy">Struggling with breakouts? Discover your skin concerns, get practical skincare advice, and find products that work for your routine.</p><div className="hero-buttons"><Button asChild size="lg"><Link to="/analysis">Analyze my skin <ArrowUpRight/></Link></Button><Button asChild size="lg" variant="outline"><Link to="/tips">Explore skincare tips <ArrowRight/></Link></Button></div><p className="hero-reassurance"><ShieldCheck size={13}/>Simple advice. Smarter skincare. No judgment.</p></div><div className="hero-floating"><div className="floating-top"><span className="floating-icon"><Sparkles size={18}/></span>A little clarity for your skin</div><div className="floating-line"/><div className="floating-row"><Check size={12}/>Skin analysis made simple</div><div className="floating-row"><Check size={12}/>Your personalized skincare routine</div><div className="floating-row"><Check size={12}/>Find products for your skin</div></div><span className="photo-tag">Real skin deserves real kindness.<br/>Illustrative campaign image.</span></section><div className="hero-bottom"><div><Heart size={17}/><span>Made for teens. Made for you.</span></div><div><Leaf size={17}/><span>Simple, beginner-friendly routines</span></div><div><ShieldCheck size={17}/><span>Your photo stays private</span></div><small>A skincare education prototype · No real AI diagnosis</small></div><section className="section"><div className="section-header"><div><span className="eyebrow">LESS GUESSWORK. MORE UNDERSTANDING.</span><h2>A little care goes a long way.</h2></div><Link className="text-link" to="/how-it-works">How it works <ArrowUpRight size={16}/></Link></div><Steps/></section><section className="cream-band"><div className="section"><div className="section-header"><div><span className="eyebrow">LET’S START WITH WHAT’S ON YOUR MIND</span><h2>Different skin. Shared experiences.</h2><p>Whatever your skin is going through, you’re not alone.</p></div></div><div className="concern-grid">{concerns.map(c=><Link to="/analysis" className="concern-tile" key={c.title}><c.icon size={25}/><h3>{c.title}</h3><p>{c.text}</p><span className="tile-arrow"><ArrowUpRight size={17}/></span></Link>)}</div></div></section><section className="section why-layout"><div><span className="eyebrow">SKINCARE, WITHOUT THE PRESSURE</span><h2>For your skin.<br/>And your peace of mind.</h2><p>No ten-step routines. No impossible promises. Just approachable education that helps you feel more confident in your next step.</p></div><div className="why-list">{['Beginner-friendly advice, in plain language','Thoughtful product examples, not a shopping list','Teen-focused education that gets you','Easy-to-follow morning and evening routines','A judgment-free space. Always.'].map(t=><div key={t}><CheckCheck size={18}/>{t}</div>)}</div></section><StartCTA/></>;}
